@@ -54,17 +54,20 @@ sample_data.setData()
 sample_sig = Sample("sig", ROOT.kRed)
 sample_sig.setStatConfig(True)
 
-
 all_samples = [sample_bkg0, sample_bkg1, sample_data]
 
 # systematics
 norm_syst_bkg0 = Systematic("Norm_Bkg0", configMgr.weights, 1.0 + 0.5, 1.0 - 0.5, "user", "userHistoSys")
 sample_bkg0.addSystematic(norm_syst_bkg0)
 
-cb1a = Systematic("Norm_Bkg1_A", configMgr.weights, 1.0 + 0.2, 1.0 - 0.2, "user", "userHistoSys")
-#cb1b = Systematic("Norm_Bkg1_B", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
+cb1a = Systematic("Norm_Bkg1_A", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
+cb1b = Systematic("Norm_Bkg1_B", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
+cb1c = Systematic("Norm_Bkg1_C", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
+cb1d = Systematic("Norm_Bkg1_D", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
 sample_bkg1.addSystematic(cb1a)
-#sample_bkg1.addSystematic(cb1b)
+sample_bkg1.addSystematic(cb1b)
+#sample_bkg1.addSystematic(cb1c)
+#sample_bkg1.addSystematic(cb1d)
 
 def sample_by_name(name) :
     global all_samples
@@ -92,8 +95,8 @@ yields_dict = {
     ,
     "SR" : {
         "bkg0" : 0.
-        ,"bkg1" : 0.
-        ,"data" : 0.
+        ,"bkg1" : 10.
+        ,"data" : 10.
         ,"sig" : 0.
     }
 }
@@ -181,6 +184,5 @@ if myFitType == FitType.Exclusion :
 #    tlx.addSignalChannels(sr_channels)
 
 if myFitType == FitType.Background :
-    tlx.addSignalChannels(sr_channels)
-    #tlx.addValidationChannels(sr_channels)
-
+    #tlx.addSignalChannels(sr_channels)
+    tlx.addValidationChannels(sr_channels)
