@@ -66,6 +66,9 @@ syst_bkg0_sr = Systematic("SYST_BKG0_SR", configMgr.weights, 1.0 + 0.25, 1.0 - 0
 syst_bkg1_cr = Systematic("SYST_BKG1_CR", configMgr.weights, 1.0 + 0.05, 1.0 - 0.05, "user", "userHistoSys")
 syst_bkg1_sr = Systematic("SYST_BKG1_SR", configMgr.weights, 1.0 + 0.25, 1.0 - 0.25, "user", "userHistoSys")
 
+sample_bkg0.addSystematic(syst_bkg0_cr)
+sample_bkg1.addSystematic(syst_bkg1_cr)
+
 #norm_syst_bkg1 = Systematic("Norm_Bkg1_0", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
 #norm_syst2_bkg1 = Systematic("Norm_Bkg1_1", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
 #norm_syst_bkg2 = Systematic("Norm_Bkg2", configMgr.weights, 1.0 + 0.10, 1.0 - 0.10, "user", "userHistoSys")
@@ -84,24 +87,24 @@ def sample_by_name(name) :
 # setup the yields
 yields_dict = {
     "CR_BKG0" : {
-        "bkg0" : 98.
-        ,"bkg1" : 2.
+        "bkg0" : 80.
+        ,"bkg1" : 10.
         #,"bkg2" : 80.
         ,"data" : 100.
         #,"sig" : 0.
     }
     ,
     "CR_BKG1" : {
-        "bkg0" : 1.
-        ,"bkg1" : 74.
-        ,"data" : 75.
+        "bkg0" : 50.
+        ,"bkg1" : 50.
+        ,"data" : 100.
     }
     ,
     "SR_BKG0" : {
-        "bkg0" : 13.
-        ,"bkg1" : 3. 
+        "bkg0" : 5
+        ,"bkg1" : 5
         #,"bkg2" : 0.
-        ,"data" : 30.
+        ,"data" : 18.
         #,"sig" : 0.
     }
 }
@@ -167,17 +170,18 @@ for isample, sample in enumerate(all_samples) :
 # add the samples
 tlx.addSamples(all_samples)
 for region_name in yields_dict :
+    #if "BKG1" in region_name and "CR" in region_name : continue
     c = tlx.addChannel("cuts",[region_name], 1.0, 0.5, 1.5)
     if "CR" in region_name and "BKG0" in region_name :
         cr_channels.append(c)
-        c.getSample("bkg0").addSystematic(syst_bkg0_cr)
+        #c.getSample("bkg0").addSystematic(syst_bkg0_cr)
     if "CR" in region_name and "BKG1" in region_name :
         cr_channels.append(c)
-        c.getSample("bkg1").addSystematic(syst_bkg1_cr)
+        #c.getSample("bkg1").addSystematic(syst_bkg1_cr)
     if "SR" in region_name and "BKG0" in region_name :
         sr_channels.append(c)
-        c.getSample("bkg0").addSystematic(syst_bkg0_sr)
-        c.getSample("bkg1").addSystematic(syst_bkg1_sr)
+        #c.getSample("bkg0").addSystematic(syst_bkg0_sr)
+        #c.getSample("bkg1").addSystematic(syst_bkg1_sr)
     all_channels.append(c)
 
 print "SR CHANNELS %s" % [x.name for x in sr_channels]

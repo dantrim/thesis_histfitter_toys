@@ -60,12 +60,12 @@ sample_sig.setStatConfig(True)
 all_samples = [sample_bkg0, sample_bkg1, sample_bkg2, sample_data]
 
 # systematics
-norm_syst_bkg2 = Systematic("Norm_Bkg2", configMgr.weights, 1.0 + 0.10, 1.0 - 0.10, "user", "userHistoSys")
-sample_bkg2.addSystematic(norm_syst_bkg2)
 norm_syst_bkg1 = Systematic("Norm_Bkg1_0", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
 norm_syst2_bkg1 = Systematic("Norm_Bkg1_1", configMgr.weights, 1.0 + 0.1, 1.0 - 0.1, "user", "userHistoSys")
+norm_syst_bkg2 = Systematic("Norm_Bkg2", configMgr.weights, 1.0 + 0.10, 1.0 - 0.10, "user", "userHistoSys")
 sample_bkg1.addSystematic(norm_syst_bkg1)
 sample_bkg1.addSystematic(norm_syst2_bkg1)
+sample_bkg2.addSystematic(norm_syst_bkg2)
 #sample_bkg0.addSystematic(norm_syst_bkg0)
 
 #cb1a = Systematic("Norm_Bkg1_A", configMgr.weights, 1.0 + 0.80, 1.0 - 0.80, "user", "userHistoSys")
@@ -89,8 +89,8 @@ def sample_by_name(name) :
 yields_dict = {
     "CR_BKG0" : {
         "bkg0" : 20.
-        ,"bkg1" : 0.
-        ,"bkg2" : 80.
+        ,"bkg1" : 80.
+        #,"bkg2" : 80.
         ,"data" : 100.
         ,"sig" : 0.
     }
@@ -98,7 +98,7 @@ yields_dict = {
     "CR_BKG1" : {
         "bkg0" : 0.
         ,"bkg1" : 100. 
-        ,"bkg2" : 0.
+        #,"bkg2" : 0.
         ,"data" : 100.
         ,"sig" : 0.
     }
