@@ -27,7 +27,7 @@ class Parameter :
         return self.is_norm_factor
 
     def Print(self) :
-        print "NP %s: %f (+%f, -%f)"%(self.name, self.final_value, self.up_error, self.down_error)
+        print "XXX NP %s %f %f %f"%(self.name, self.final_value, self.up_error, self.down_error)
 
 
 def get_final_value_lines(infile="") :
@@ -125,7 +125,7 @@ def make_pull(final_nps) :
     # axes
     nbins = len(final_nps)
     frame = r.TH2F('frame_%s'%outfile, '', nbins, -0.5, nbins-0.5, 6, -2, 2)
-    frame.SetYTitle("Final NP Value")
+    frame.SetYTitle("Post-fit Parameter Value") #Final NP Value")
     frame.SetXTitle("")
     frame.GetYaxis().SetTitleOffset(1.45*0.5)
     for ibin, np in enumerate(final_nps) :
